@@ -10,58 +10,68 @@
 import java.util.Scanner;
 public class MaasHesaplama {
     public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
 
         // Sabit oranlar
         final double SGK_ORANI = 0.14;
         final double GELIR_VERGISI_ORANI = 0.15;
         final double DAMGA_VERGISI_ORANI = 0.00759;
 
-        Scanner input = new Scanner(System.in);
+        System.out.println("=== MAAS HESAPLAMA SISTEMI ===\n");
 
-        // Bilgiler alınır
-        System.out.print("Calisan adi soyadi: ");
+        System.out.print("Çalışan adı soyadı: ");
         String adSoyad = input.nextLine();
 
-        System.out.print("Aylik brut maas (TL): ");
+        System.out.print("Aylık brüt maaş (TL): ");
         double brutMaas = input.nextDouble();
 
-        System.out.print("Mesai saati sayisi: ");
-        int mesaiSaati = input.nextInt();
+        System.out.print("Mesai saati sayısı: ");
+        int mesaiSaat = input.nextInt();
 
-        // 1. Gelirler
-        double mesaiUcreti = (brutMaas / 160) * mesaiSaati * 1.5;
+        // Hesaplamalar
+        double mesaiUcreti = (brutMaas / 160) * mesaiSaat * 1.5;
         double toplamGelir = brutMaas + mesaiUcreti;
 
-        // 2. Kesintiler
-        double sgk = toplamGelir * SGK_ORANI;
+        double sgkKesinti = toplamGelir * SGK_ORANI;
         double gelirVergisi = toplamGelir * GELIR_VERGISI_ORANI;
         double damgaVergisi = toplamGelir * DAMGA_VERGISI_ORANI;
-        double toplamKesinti = sgk + gelirVergisi + damgaVergisi;
+        double toplamKesinti = sgkKesinti + gelirVergisi + damgaVergisi;
 
-        // 3. Net Maaş
         double netMaas = toplamGelir - toplamKesinti;
 
-        // BORDRO
-        System.out.println("====================================================");
-        System.out.println("                      MAAS BORDROSU                 ");
-        System.out.println("====================================================");
+        // İstatistikler
+        double kesintiOrani = (toplamKesinti / toplamGelir) * 100;
+        double saatlikNetKazanc = netMaas / 176;
+        double gunlukNetKazanc = netMaas / 22;
+
+        // Bordro
+        System.out.println("\n====================================");
+        System.out.println("         MAAS BORDROSU");
+        System.out.println("====================================");
         System.out.println("Calisan: " + adSoyad);
-        System.out.println();
-        System.out.println("GELIRLER:");
-        System.out.printf("Brut Maas                : %.2f TL\n", brutMaas);
-        System.out.printf("Mesai Ucreti (%d saat)      : %.2f TL\n", mesaiSaati, mesaiUcreti);
-        System.out.println("--------------------------------------------");
-        System.out.printf("TOPLAM GELIR             : %.2f TL\n", toplamGelir);
-        System.out.println();
-        System.out.println("KESINTILER:");
-        System.out.printf("SGK Kesintisi (14.0%%)    : %.2f TL\n", sgk);
-        System.out.printf("Gelir Vergisi (15.0%%)    : %.2f TL\n", gelirVergisi);
-        System.out.printf("Damga Vergisi (0.8%%)     : %.2f TL\n", damgaVergisi);
-        System.out.println("--------------------------------------------");
-        System.out.printf("TOPLAM KESINTI           : %.2f TL\n", toplamKesinti);
-        System.out.printf("NET MAAS                 : %.2f TL\n", netMaas);
-        System.out.println("====================================================");
+
+        System.out.println("\nGELIRLER:");
+        System.out.printf("  Brut Maas              : %8.2f TL\n", brutMaas);
+        System.out.printf("  Mesai Ucreti (%d saat) : %8.2f TL\n", mesaiSaat, mesaiUcreti);
+        System.out.println("  ------------------------");
+        System.out.printf("  TOPLAM GELIR           : %8.2f TL\n", toplamGelir);
+
+        System.out.println("\nKESINTILER:");
+        System.out.printf("  SGK Kesintisi (14.0%%)  : %8.2f TL\n", sgkKesinti);
+        System.out.printf("  Gelir Vergisi (15.0%%)  : %8.2f TL\n", gelirVergisi);
+        System.out.printf("  Damga Vergisi (0.8%%)   : %8.2f TL\n", damgaVergisi);
+        System.out.println("  ------------------------");
+        System.out.printf("  TOPLAM KESINTI         : %8.2f TL\n", toplamKesinti);
+
+        System.out.printf("\nNET MAAS                 : %.2f TL\n", netMaas);
+
+        System.out.println("\nISTATISTIKLER:");
+        System.out.printf("  Kesinti Orani          : %.1f\n", kesintiOrani);
+        System.out.printf("  Saatlik Net Kazanc     : %.2f TL/saat\n", saatlikNetKazanc);
+        System.out.printf("  Gunluk Net Kazanc      : %.2f TL/gun\n", gunlukNetKazanc);
+        System.out.println("====================================");
 
         input.close();
     }
 }
+
