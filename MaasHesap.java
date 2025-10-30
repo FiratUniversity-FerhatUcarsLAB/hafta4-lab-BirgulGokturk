@@ -8,7 +8,7 @@
    Sonuçta çalışan, kazanç ve kesintilerini şeffaf biçimde görebileceği düzenli bir bordro çıktısı elde eder.
  * 
 import java.util.Scanner;
-public class MaasHesaplama {
+public class MaasHesap {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
