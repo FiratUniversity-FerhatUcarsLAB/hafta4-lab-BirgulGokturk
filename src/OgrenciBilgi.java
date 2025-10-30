@@ -26,12 +26,13 @@ public class OgrenciBilgi {
 
         // Bilgileri düzenli biçimde yazdırma
         System.out.println("\n--- Öğrenci Bilgileri ---");
-        System.out.printf("\nAd: " +  ad);
+        System.out.printf("\nAd: " + ad);
         System.out.printf("\nSoyad: " + soyad);
         System.out.printf("\nÖğrenci No: " + ogrenciNumarasi);
         System.out.printf("\nYaş: " + yas);
         System.out.printf("\nGPA: %.2f%n", gpa);
 
         input.close();
+
     }
 }
